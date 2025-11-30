@@ -1,27 +1,34 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next" // Import Viewport type
 import { Geist, Geist_Mono } from "next/font/google"
 import { Playfair_Display, Crimson_Text } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
+// Font definitions remain the same, though you may not use all of them
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 const _playfair = Playfair_Display({ subsets: ["latin"], weight: "700" })
 const _crimson = Crimson_Text({ subsets: ["latin"], weight: ["400", "600"] })
+
+// --- FIX APPLIED HERE ---
+// 1. Export the viewport configuration separately.
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  // themeColor is now correctly placed inside the Viewport object/export
+  themeColor: "#d4a5a0", 
+}
+// ------------------------
 
 export const metadata: Metadata = {
   title: "GlowUp - Your Personalized Beauty Advisor",
   description:
     "Discover your glow with AI-powered beauty recommendations, skin analysis, and virtual try-on technology.",
   generator: "v0.app",
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
-    themeColor: "#d4a5a0",
-  },
+  // 2. The 'viewport' property is REMOVED from the Metadata object
   icons: {
     icon: [
       {
