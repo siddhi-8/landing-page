@@ -5,18 +5,30 @@ import { Card } from "@/components/ui/card"
 import { Sparkles, Palette, Eye } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-const features = [
+// 1. Define the type (optional but good practice)
+interface Feature {
+  id: string; // <-- ADDED ID PROPERTY
+  title: string;
+  description: string;
+  icon: React.ElementType; // Use a more general type for the icon component
+}
+
+// 2. Add the 'id' to each object in the data array
+const features: Feature[] = [
   {
+    id: "scan", // <-- ADDED ID
     title: "AI Skin Scan",
     description: "Advanced analysis of your skin type, concerns, and needs for personalized care recommendations.",
     icon: Sparkles,
   },
   {
+    id: "routines", // <-- ADDED ID
     title: "Personalized Routines",
     description: "Custom skincare and makeup routines tailored to your unique beauty profile and lifestyle.",
     icon: Palette,
   },
   {
+    id: "tryon", // <-- ADDED ID
     title: "Virtual Try-On",
     description: "See how products look on you before you buy with our augmented reality feature.",
     icon: Eye,
@@ -26,6 +38,7 @@ const features = [
 export default function Features() {
   const [activeFeature, setActiveFeature] = useState("scan")
 
+  // The code now correctly finds the 'id' property
   const activeItem = features.find((f) => f.id === activeFeature)
 
   return (
@@ -40,6 +53,7 @@ export default function Features() {
               key={index}
               className={cn(
                 "border border-border p-8 rounded-lg bg-background hover:shadow-md transition-shadow",
+                // This logic is using the 'id' to set the active style
                 isActive ? "bg-primary/10" : "bg-muted/30 hover:bg-muted/50",
               )}
             >
